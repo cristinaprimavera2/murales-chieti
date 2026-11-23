@@ -172,16 +172,26 @@
     requestAnimationFrame(step);
   }
 
-  fetch(url).then(function(r){
+  // Se il servizio è lento, dopo 3 secondi mostriamo "+1" senza bloccare la pagina.
+  // La richiesta continua comunque in background (keepalive), così la visita viene contata
+  // e, se arriva la risposta, il numero vero sostituisce il "+1".
+  var shown = false;
+  function fallback(){
+    if (shown) return;
+    el.classList.remove("loading");
+    el.textContent = "+1";
+    document.getElementById("count-sub").textContent = "La tua presenza conta. Una voce in più che dice NO alla violenza contro le donne.";
+  }
+  var timer = setTimeout(fallback, 3000);
+
+  fetch(url, { keepalive: true, cache: "no-store" }).then(function(r){
     if (r.status === 404 && preview) return { value: 0 };
     if (!r.ok) throw new Error(r.status);
     return r.json();
-  }).then(function(d){ show(Number(d.value) || 0); })
-    .catch(function(){
-      el.classList.remove("loading");
-      el.textContent = "+1";
-      document.getElementById("count-sub").textContent = "La tua presenza conta. Una voce in più che dice NO alla violenza contro le donne.";
-    });
+  }).then(function(d){
+    clearTimeout(timer); shown = true;
+    show(Number(d.value) || 0);
+  }).catch(function(){ clearTimeout(timer); fallback(); });
 
   // Copia hashtag
   document.querySelectorAll(".tag").forEach(function(b){
