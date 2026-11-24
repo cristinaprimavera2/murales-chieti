@@ -153,9 +153,10 @@
 <script>
   // Contatore: ogni apertura della pagina aggiunge +1.
   // Per vedere il numero senza aumentarlo (anteprime, test) apri la pagina con #anteprima alla fine dell'indirizzo.
-  var NS = "lions-chieti-murales-2026", KEY = "scansioni-qr";
+  // Il conteggio è salvato nel Google Foglio "Contatore murales Chieti" (scheda "Scansioni").
+  var API = "https://script.google.com/macros/s/AKfycbxsNiwZ_np_5lfQBi2TOjK9qE1PqT0bCu5dDXeeH9alRnydwD7RwSdPdt5zAisABuu2/exec";
   var preview = location.hash === "#anteprima";
-  var url = "https://abacus.jasoncameron.dev/" + (preview ? "get/" : "hit/") + NS + "/" + KEY;
+  var url = API + "?mode=" + (preview ? "get" : "hit");
   var el = document.getElementById("count");
 
   function show(n){
@@ -172,7 +173,7 @@
     requestAnimationFrame(step);
   }
 
-  // Se il servizio è lento, dopo 3 secondi mostriamo "+1" senza bloccare la pagina.
+  // Se il servizio è lento, dopo 6 secondi mostriamo "+1" senza bloccare la pagina.
   // La richiesta continua comunque in background (keepalive), così la visita viene contata
   // e, se arriva la risposta, il numero vero sostituisce il "+1".
   var shown = false;
@@ -182,7 +183,7 @@
     el.textContent = "+1";
     document.getElementById("count-sub").textContent = "La tua presenza conta. Una voce in più che dice NO alla violenza contro le donne.";
   }
-  var timer = setTimeout(fallback, 3000);
+  var timer = setTimeout(fallback, 6000);
 
   fetch(url, { keepalive: true, cache: "no-store" }).then(function(r){
     if (r.status === 404 && preview) return { value: 0 };
