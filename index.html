@@ -67,8 +67,22 @@
   .event .title{font-family:Montserrat;font-weight:700;color:var(--orange)}
 
   .closing{font-family:Montserrat;font-weight:700;font-size:1.15rem;line-height:1.4}
-  footer{background:#0a1222;padding:32px 24px 44px;text-align:center;font-size:.85rem;color:var(--muted)}
-  footer strong{color:var(--ink);font-weight:600}
+  .claim{font-family:Montserrat;font-weight:900;text-transform:uppercase;font-size:clamp(1.9rem,8.5vw,3rem);line-height:1.02;margin-top:6px}
+  .claim-sub{font-family:Montserrat;font-weight:800;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(.95rem,4vw,1.2rem);margin-top:14px;padding-top:14px;border-top:3px solid var(--ink);display:inline-block}
+  .event + .event{margin-top:16px}
+  footer{background:#fff;color:#1b1b1b;padding:36px 20px 44px}
+  .sponsors{max-width:960px;margin:0 auto}
+  .sp-label{font-family:Montserrat;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#6b6b6b;margin:0 0 14px}
+  .sp-group + .sp-group{margin-top:28px}
+  .sp-row{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center}
+  .sp{display:flex;align-items:center;gap:14px;min-width:0}
+  .sp img{height:76px;width:auto;flex:0 0 auto}
+  .sp .t{font-family:Montserrat;font-weight:700;font-size:.92rem;line-height:1.25;color:#1b1b1b}
+  .sp .t .hl{color:#c9a100;display:block;font-weight:800}
+  .sp .t.comune{font-family:Georgia,'Times New Roman',serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:1rem}
+  .sp-sep{width:1px;align-self:stretch;background:#d4d4d4}
+  @media (max-width:560px){.sp-sep{display:none}.sp-row{flex-direction:column;align-items:flex-start}}
+  .credits{max-width:960px;margin:28px auto 0;padding-top:18px;border-top:1px solid #e3e3e3;font-size:.8rem;color:#6b6b6b}
   .butterfly{position:absolute;z-index:1;width:46px;opacity:.95;animation:fly 7s ease-in-out infinite}
   @keyframes fly{0%,100%{transform:translate(0,0) rotate(-8deg)}50%{transform:translate(-10px,-14px) rotate(6deg)}}
   @media (prefers-reduced-motion:reduce){.butterfly{animation:none}html{scroll-behavior:auto}}
@@ -86,6 +100,8 @@
     <p class="answer">Oggi hai risposto: <em>vale moltissimo.</em></p>
     <div class="rule"></div>
     <p class="lead">Grazie per esserti fermato. Hai lasciato il segno della tua presenza.</p>
+    <p class="claim" style="margin-top:28px">Rendi visibile l'invisibile.</p>
+    <p class="claim-sub">Contro la violenza sulle donne</p>
   </div>
 </header>
 
@@ -132,9 +148,14 @@
   </section>
 
   <section>
-    <h2>🎭 Prossimo appuntamento <span class="accent">a teatro</span></h2>
+    <h2>Gli <span class="accent">appuntamenti</span></h2>
     <div class="event">
-      <div class="when">Sabato 5 dicembre · ore 18:00</div>
+      <div class="when">05/12/2026 · ore 11:30</div>
+      <div class="where">Via N. Nicolini, Chieti (CH)</div>
+      <p><span class="title">Inaugurazione del murales</span></p>
+    </div>
+    <div class="event">
+      <div class="when">🎭 Sabato 5 dicembre · ore 18:00</div>
       <div class="where">Auditorium Di Marzio, Palazzo De Maio – Chieti</div>
       <p>Il nostro percorso di sensibilizzazione continua con lo spettacolo benefico <span class="title">"Ombra dei diritti"</span> di Rocco Dragonetti. L'intero ricavato sarà devoluto alla "Stanza Rosa", lo spazio di accoglienza protetta per donne e minori vittime di violenza attivo presso l'Ospedale Clinicizzato "SS. Annunziata" di Chieti. Ti aspettiamo!</p>
     </div>
@@ -146,8 +167,36 @@
 </main>
 
 <footer>
-  <p><strong>Lions Club Chieti "I Marrucini" · Lions Club Chieti Host · Leo Club Chieti · Comitato Pari Opportunità dell'Ordine degli Avvocati di Chieti</strong></p>
-  <p style="margin-top:8px">Con il Patrocinio del Comune di Chieti</p>
+  <div class="sponsors">
+    <div class="sp-group">
+      <p class="sp-label">Promosso da</p>
+      <div class="sp-row">
+        <div class="sp">
+          <img src="img/lions.jpg" alt="Lions International" width="196" height="188">
+          <div class="t"><span class="hl">Lions International</span>Chieti Host<br>Chieti I Marrucini<br>Leo Club Chieti</div>
+        </div>
+        <div class="sp-sep" aria-hidden="true"></div>
+        <div class="sp">
+          <img src="img/cpo.jpg" alt="Comitato Pari Opportunità C.O.A. Chieti" width="339" height="360">
+          <div class="t">Comitato Pari<br>Opportunità<br>Ordine Avvocati<br>Chieti</div>
+        </div>
+      </div>
+    </div>
+    <div class="sp-group">
+      <p class="sp-label">Con il patrocinio di</p>
+      <div class="sp-row">
+        <div class="sp">
+          <img src="img/chieti-brand.jpg" alt="Chieti – Bella da sempre" width="283" height="360">
+        </div>
+        <div class="sp-sep" aria-hidden="true"></div>
+        <div class="sp">
+          <img src="img/comune-stemma.jpg" alt="Stemma del Comune di Chieti" width="312" height="360">
+          <div class="t comune">Comune<br>di Chieti</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="credits">Lions Club Chieti "I Marrucini" · Lions Club Chieti Host · Leo Club Chieti · Comitato Pari Opportunità dell'Ordine degli Avvocati di Chieti – Con il Patrocinio del Comune di Chieti</p>
 </footer>
 
 <script>
